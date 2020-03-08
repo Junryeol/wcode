@@ -1,17 +1,11 @@
 {
-  "name": "wcode-v2",
+  "name": "wcode",
   "version": "0.1.0",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/junryeol/wcode.git"
   },
   "bin": "./wcode",
-  "files": [
-    "wcode",
-    "build",
-    "server"
-  ],
   "dependencies": {
     "@monaco-editor/react": "^3.1.1",
     "@testing-library/jest-dom": "^4.2.4",
