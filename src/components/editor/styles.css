@@ -1,0 +1,16 @@
+.Editor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Editor .editorTabs {
+    height: 36px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #252526;
+    padding: 0;
+}

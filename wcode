@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const resolve = require('path').resolve;
+const package_json = JSON.parse(fs.readFileSync(resolve(__dirname, './package.json')).toString('utf-8'));
+
+if (process.argv.indexOf('-v') > -1 || process.argv.indexOf('--version') > -1) {
+    console.log(package_json.version);
+    process.exit();
+}
+
+process.env.NODE_ENV = "production";
+
+require('yargs')
+    .usage(`Usage: ${package_json.name} [options] [<directory>=.]`)
+    .example(`${package_json.name}`, 'Open the project in the editor on current working directory')
+    .example(`${package_json.name} /path/to/project`, 'Open the project in the editor on default port')
+    .example(`${package_json.name} -p 8080 /path/to/project`, 'Open the project in the editor on port 8080')
+    .example(`${package_json.name} --ssl path/to/keys /path/to/project`, 'Open the project with SSL in the editor on default port')
+    .demandCommand(0)
+    
+    .help('h')
+    .alias('h', 'help')
+
+    .alias('a', 'addr')
+    .alias('p', 'port')
+    .nargs('p', 1)
+    .describe('p', 'Set the editor port number')
+    .default('p', 9876)
+
+    .options({
+        headless: { default: false, type: 'boolean' },
+        ssl: { type: 'string' },
+    })
+    .describe('headless', 'Prevent local browser from open')
+    .describe('ssl', 'Configures SSL encrpytion. Provide the keys.')
+
+    .alias('v', 'version')
+    .describe('v', 'Show current version');
+
+require('./server/index');
