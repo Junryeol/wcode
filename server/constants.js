@@ -1,6 +1,6 @@
 const yargs = require('yargs').argv;
 
-const APPLICATION_PATH = './build';
+const APPLICATION_PATH = '../build';
 const DEBUG_MODE  = process.env.NODE_ENV === 'development';
 const NO_BROWSER = yargs.headless;
 const PROJECT_DIR = yargs._[0] || '.';
