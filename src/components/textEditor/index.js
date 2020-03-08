@@ -1,10 +1,11 @@
 import React from 'react';
-import MonacoEditor from 'react-monaco-editor'; // Reference: https://github.com/superRaytin/react-monaco-editor
+// import MonacoEditor from 'react-monaco-editor'; // Reference: https://github.com/superRaytin/react-monaco-editor
+import Editor from '@monaco-editor/react';
 import './styles.css';
 
 export default class TextEditor extends React.Component {
 
-    state = { value: '', language: '', editor: null };
+    state = { value: '', language: '', theme: 'dark', editor: null };
 
     editor = null;
     
@@ -12,15 +13,15 @@ export default class TextEditor extends React.Component {
     options = {
         minimap: { enabled: false },
         selectOnLineNumbers: true,
-        theme: 'vs-dark'
+        theme: 'dark'
     };
 
-    get requireConfig() {
-        return {
-            url: `vendor/vs/loader.js`,
-            paths: { 'vs': `vendor/vs` }
-        };
-    }
+    // get requireConfig() {
+    //     return {
+    //         url: `vendor/vs/loader.js`,
+    //         paths: { 'vs': `vendor/vs` }
+    //     };
+    // }
 
     get visible() {
         return this.state.value && this.state.language;
@@ -31,14 +32,14 @@ export default class TextEditor extends React.Component {
     }
 
     editorDidMount(editor, monaco) {
-        editor.focus();
+        // editor.focus();
         this.editor = editor;
     }
 
     loadCode(value, language) {
         const { body } = this.props;
         this.setState({ value, language });
-        this.editor.layout(body);
+        // this.editor.layout(body);
     }
 
     updateDimensions() {
@@ -51,8 +52,8 @@ export default class TextEditor extends React.Component {
 
     render() {
         return (
-            <div className={`TextEditor ${this.visible && 'visible'}`}>
-                <MonacoEditor
+            <div className={`TextEditor ${this.visible && 'visible'}`} height={"100%"}>
+                <Editor
                     {...this.state}
                     options={this.options}
                     onChange={(value) => this.setState({ value })}

@@ -6,7 +6,7 @@ import TextEditor from '../textEditor';
 import './styles.css';
 import { debounce } from 'lodash';
 
-class Editor extends React.Component {
+class CodeEditor extends React.Component {
 
     state = { body: { width: 0, height: 0 } };
     textEditor = React.createRef();
@@ -52,11 +52,16 @@ class Editor extends React.Component {
         Action.setEditorHandler(input);
     }
 
+    get style() {
+        const { body: { width, height } } = this.state;
+        return { width, height };
+    }
+
     render() {
         return (
             <div className="Editor" ref="editor">
                 {this.renderOpenedFileTabs()}
-                <div className="editorView">
+                <div className="editorView" style={this.style}>
                     <TextEditor ref={this.setRef} {...this.state} />
                 </div>
             </div>
@@ -64,4 +69,4 @@ class Editor extends React.Component {
     }
 }
 
-export default inject('fileBuffer')(observer(Editor));
+export default inject('fileBuffer')(observer(CodeEditor));

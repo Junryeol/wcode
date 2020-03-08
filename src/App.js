@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import Editor from './components/editor';
+import CodeEditor from './components/editor';
 import Header from './components/header';
 import Sidebar from './components/sidebar';
 import StatusBar from './components/statusBar';
@@ -19,7 +19,7 @@ class App extends React.Component {
                 <Header />
                 <div className="body" style={this.style}>
                     <Sidebar />
-                    <Editor />
+                    <CodeEditor />
                 </div>
                 <StatusBar />
             </div>
